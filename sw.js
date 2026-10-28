@@ -59,6 +59,11 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Страница приложения: «Уроки» (learn/) или сам трекер.
+function pageKey(url) {
+  return url.pathname.includes('/learn/') ? './learn/index.html' : './index.html';
+}
+
 // Кэшируем: свои файлы, шрифты Google и модули Firebase SDK. Запросы к базе данных — никогда.
 function cacheable(url) {
   if (url.origin === self.location.origin) return true;
@@ -79,10 +84,10 @@ self.addEventListener('fetch', (event) => {
       fetch(req)
         .then((res) => {
           const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put('./index.html', copy));
+          caches.open(CACHE).then((c) => c.put(pageKey(url), copy));
           return res;
         })
-        .catch(() => caches.match('./index.html', { ignoreSearch: true })),
+        .catch(() => caches.match(pageKey(url), { ignoreSearch: true })),
     );
     return;
   }

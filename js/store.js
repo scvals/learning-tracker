@@ -7,7 +7,7 @@ import { todayISO, weekOf } from './dates.js';
 
 export const SCHEMA_VERSION = 1;
 export const APP_ID = 'learning-tracker';
-export const COLLECTIONS = ['settings', 'skills', 'tasks', 'days', 'journal', 'checklist', 'metrics', 'summaries'];
+export const COLLECTIONS = ['settings', 'skills', 'tasks', 'days', 'journal', 'checklist', 'metrics', 'summaries', 'learn'];
 
 const LS_KEY = 'lt:data:v1';
 
@@ -344,4 +344,15 @@ export function previousValue(metricId, week) {
 
 export function summaries() {
   return list('summaries').sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+}
+
+// --- прогресс обучения (приложение «Уроки», learn/) ---
+// Записи коллекции learn: `lesson:<id>` — { steps:{[i]:true}, done, quizBest }, `word:<en>` — { known, seen }.
+
+export function learn(id) {
+  return get('learn', id);
+}
+
+export function setLearn(id, partial) {
+  return put('learn', { id, ...partial });
 }

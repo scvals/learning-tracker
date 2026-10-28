@@ -11,7 +11,7 @@ service cloud.firestore {
 
     function validRecord(d) {
       return d.updatedAt is number
-        && d.col in ['settings', 'skills', 'tasks', 'days', 'journal', 'checklist', 'metrics', 'summaries']
+        && d.col in ['settings', 'skills', 'tasks', 'days', 'journal', 'checklist', 'metrics', 'summaries', 'learn']
         && d.id is string
         && (!('deleted' in d) || d.deleted is bool);
     }
