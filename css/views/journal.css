@@ -1,0 +1,60 @@
+/* «Журнал» — только токены темы. */
+
+.jr-tabs { margin-bottom: 12px; }
+.jr-tab-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
+}
+.jr-intro { margin: 0 0 14px; }
+
+.jr-skill { margin-bottom: 16px; }
+.jr-skill__title { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.jr-stats { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.jr-stats .ico { width: 16px; height: 16px; }
+
+.jr-block { min-width: 0; }
+.jr-block + .jr-block {
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+.jr-block-head { margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
+.jr-block-head.row { flex-direction: row; flex-wrap: nowrap; gap: 4px 8px; }
+.jr-block-head .h3 { margin: 0; color: var(--ink); }
+.jr-block-head .btn--sm { margin-right: -8px; }
+.jr-counter-row { min-height: 0; }
+
+.jr-metric { min-width: 0; }
+.jr-metric .field__label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.jr-opt { font-weight: 700; }
+.jr-num { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.jr-num-input { max-width: 9rem; font-variant-numeric: tabular-nums; }
+.jr-unit { flex: none; }
+.jr-bool { max-width: 14rem; }
+.jr-delta { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 4px; min-height: 18px; }
+.jr-delta .delta { white-space: normal; }
+
+.jr-checklist { gap: 0; }
+.jr-check { align-items: flex-start; }
+.jr-check .checkbox { margin-top: 2px; }
+.jr-check__text { flex: 1 1 auto; min-width: 0; line-height: 1.4; overflow-wrap: anywhere; padding-top: 2px; }
+.jr-check.is-carried .jr-check__text { color: var(--muted); }
+.jr-carried { white-space: nowrap; }
+
+.jr-edit__row { gap: 6px; padding: 6px 0; min-height: 0; }
+.jr-edit__input { flex: 1 1 auto; min-width: 0; }
+.jr-edit__actions { display: flex; flex: none; gap: 2px; }
+.jr-edit__add { gap: 8px; }
+.jr-edit__add .input { flex: 1 1 auto; min-width: 0; }
+.jr-edit__add .btn { flex: none; padding: 0 14px; }
+
+.jr-note { width: 100%; resize: vertical; min-height: 84px; }
+.jr-saved { opacity: 0; transition: opacity .25s; }
+.jr-saved.is-shown { opacity: 1; }
+.jr-block .row--between > .field__label { margin: 0; }
+.jr-block-head .btn--sm { padding: 0 10px; font-size: .88rem; }
+.jr-block-head .row--between { flex-wrap: nowrap; align-items: center; }
+.jr-block-head .row--between .h3 { min-width: 0; }

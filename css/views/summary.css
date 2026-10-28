@@ -1,0 +1,137 @@
+/* Экран «Итоги» */
+
+.summary { min-width: 0; }
+
+.summary-finished { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
+.summary-finished__art { width: 140px; max-width: 60%; color: var(--accent); }
+.summary-finished__art:empty { display: none; }
+.summary-finished__art svg, .summary-celebrate__art svg { width: 100%; height: auto; display: block; }
+.summary-finished__text { margin: 0; font-size: 1.6rem; color: var(--ink); }
+.summary-finished p { margin: 0; }
+
+.summary-actions .grid-2 { gap: 8px; }
+.summary-actions .grid-2 .btn { min-height: 52px; white-space: normal; line-height: 1.15; }
+.summary-extend { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.summary-extend__text { display: flex; flex-direction: column; gap: 2px; }
+.summary-extend .chip { min-height: 40px; }
+
+/* --- навыки --- */
+.summary-skill .card__title { overflow-wrap: anywhere; }
+.summary-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.summary-stat {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--skill-soft, var(--surface-2));
+  min-width: 0;
+}
+.summary-stat__val { font-size: 1.9rem; display: inline-flex; align-items: center; gap: 4px; line-height: 1; color: var(--ink); }
+.summary-stat__val .ico { color: var(--warn); width: 18px; height: 18px; }
+.summary-stat__lbl { line-height: 1.2; }
+
+.summary-check { display: flex; flex-direction: column; gap: 4px; }
+
+.summary-weeks__bars {
+  display: flex; gap: 6px; align-items: flex-end;
+  overflow-x: auto; padding-top: 4px;
+  scrollbar-width: thin;
+}
+.summary-weeks__col {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  flex: 1 0 26px; min-width: 26px; max-width: 48px;
+}
+.summary-weeks__track {
+  position: relative; display: block; width: 100%; height: 40px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.summary-weeks__bar {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--skill, var(--accent));
+  border-radius: 4px 4px 0 0;
+}
+.summary-weeks__col.is-current .summary-weeks__lbl { color: var(--ink); font-weight: 700; }
+
+/* --- показатели --- */
+.summary-metric { display: flex; flex-direction: column; gap: 2px; padding: 6px 0; border-top: 1px solid var(--line); }
+.summary-metric:first-of-type { border-top: 0; }
+.summary-metric__head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.summary-metric__label { min-width: 0; }
+.summary-metric__value { font-weight: 700; color: var(--ink); white-space: nowrap; }
+.summary-spark-wrap { display: flex; flex-direction: column; gap: 2px; }
+.summary-spark__plot { position: relative; height: 56px; }
+.summary-spark { display: block; width: 100%; height: 100%; overflow: visible; }
+.summary-spark__base { stroke: var(--line); stroke-width: 1; }
+.summary-spark__line { fill: none; stroke: var(--skill, var(--accent)); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.summary-spark__gap { fill: none; stroke: var(--skill, var(--accent)); stroke-width: 1.5; stroke-dasharray: 3 4; opacity: .55; }
+.summary-spark__dot {
+  position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--skill, var(--accent));
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.summary-spark__axis { position: relative; height: 1.2em; }
+.summary-spark__axis span { position: absolute; transform: translateX(-50%); line-height: 1.2; }
+
+/* --- календарь --- */
+.summary-heat { overflow: hidden; }
+.summary-heat__grid { display: flex; flex-direction: column; gap: 4px; }
+.summary-heat__row {
+  display: grid;
+  grid-template-columns: 26px repeat(7, minmax(0, 1fr));
+  gap: 4px; align-items: center;
+}
+.summary-heat__wd { text-align: center; text-transform: uppercase; font-size: 0.7rem; }
+.summary-heat__wk { font-size: 0.75rem; }
+.summary-heat__row.is-current .summary-heat__wk { color: var(--ink); font-weight: 700; }
+.summary-heat__cell {
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1; min-height: 34px; min-width: 0; padding: 0;
+  border: 0; border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink-soft); font: inherit; font-size: 0.78rem;
+  cursor: pointer;
+}
+.summary-heat__cell.lvl-1 { background: color-mix(in srgb, var(--accent) 25%, var(--surface-2)); }
+.summary-heat__cell.lvl-2 { background: color-mix(in srgb, var(--accent) 48%, var(--surface-2)); }
+.summary-heat__cell.lvl-3 { background: color-mix(in srgb, var(--accent) 72%, var(--surface-2)); color: var(--accent-ink); }
+.summary-heat__cell.lvl-4 { background: var(--accent); color: var(--accent-ink); }
+.summary-heat__cell.is-future { background: transparent; border: 1px dashed var(--line); color: var(--muted); }
+.summary-heat__cell.is-today { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink-soft); }
+.summary-heat__cell:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.summary-heat__num { pointer-events: none; }
+.summary-heat__legend { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 10px; }
+.summary-heat__swatch { width: 14px; min-height: 14px; height: 14px; border-radius: 3px; cursor: default; }
+
+/* --- день в календаре --- */
+.summary-dayrow { display: flex; align-items: flex-start; gap: 10px; }
+.summary-dayrow__icon {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface-2); color: var(--muted);
+}
+.summary-dayrow.is-done .summary-dayrow__icon { background: var(--skill-soft, var(--accent-soft)); color: var(--skill, var(--accent)); }
+.summary-dayrow__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.summary-dayrow__note { overflow-wrap: anywhere; color: var(--ink-soft); }
+
+/* --- сохранённые итоги --- */
+.summary-saved {
+  display: flex; flex-direction: column; gap: 6px; width: 100%;
+  text-align: left; font: inherit; color: inherit; cursor: pointer;
+}
+.summary-saved.is-final { border-color: var(--accent); }
+.summary-saved__title { overflow-wrap: anywhere; }
+.summary-saved__excerpt {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.summary-read__overall { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+.summary-read__skill p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+
+.summary-celebrate { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.summary-celebrate__art { width: 180px; max-width: 70%; color: var(--accent); }
+.summary-celebrate__art:empty { display: none; }
+.summary-celebrate__text { font-size: 1.5rem; margin: 0; color: var(--ink); }
+.summary-celebrate p { margin: 0; }

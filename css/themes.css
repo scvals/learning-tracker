@@ -1,0 +1,373 @@
+/* ==========================================================================
+   Оформления. На <html>: data-skin="moss|linen|botanic|nordic|sashiko",
+   data-theme="light|dark". Все цвета интерфейса — отсюда.
+   ========================================================================== */
+
+/* ---------- общее для светлой / тёмной ---------- */
+:root, [data-theme="light"] {
+  --check-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.8 12.6c1.6 1.4 3 2.9 4.3 4.6 2.6-4.3 5.8-7.9 10.1-10.7' fill='none' stroke='%23fffdf7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --shadow: 0 1px 2px rgb(70 55 30 / .06), 0 8px 22px -12px rgb(70 55 30 / .22);
+}
+[data-theme="dark"] {
+  --cotton: #ece4d8;
+  --check-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.8 12.6c1.6 1.4 3 2.9 4.3 4.6 2.6-4.3 5.8-7.9 10.1-10.7' fill='none' stroke='%231c1d1c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --shadow: 0 1px 0 rgb(255 255 255 / .03) inset, 0 10px 24px -14px rgb(0 0 0 / .7);
+}
+:root {
+  --check-img-dim: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.8 12.6c1.6 1.4 3 2.9 4.3 4.6 2.6-4.3 5.8-7.9 10.1-10.7' fill='none' stroke='%23888' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --check-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.8 12.6c1.6 1.4 3 2.9 4.3 4.6 2.6-4.3 5.8-7.9 10.1-10.7' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+/* ==========================================================================
+   1. МОХ И ХАКИ (по умолчанию)
+   ========================================================================== */
+:root, [data-skin="moss"] {
+  --bg: #efeadf;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='22'><path d='M2.5 3.5c1.6 3.4 3.6 6 6.5 8.6 2.9-2.6 4.9-5.2 6.5-8.6M2.5 14.5c1.6 3.4 3.6 6 6.5 8.6 2.9-2.6 4.9-5.2 6.5-8.6' fill='none' stroke='%235e6e45' stroke-opacity='.075' stroke-width='1.5' stroke-linecap='round'/></svg>");
+  --surface: #fbf8f1;
+  --surface-2: #ece6d8;
+  --ink: #2b2e25;
+  --ink-soft: #474b3e;
+  --muted: #64665a;
+  --line: #dad2c0;
+  --accent: #5d6d44;
+  --accent-ink: #fbfaf3;
+  --accent-soft: #dfe3cc;
+  --ok: #4a7335;
+  --warn: #8f610e;
+  --danger: #a3443a;
+  --skill-1: #5f7646; --skill-1-soft: #e0e6d2;
+  --skill-2: #86743c; --skill-2-soft: #ece4c9;
+  --skill-3: #5d7280; --skill-3-soft: #dde4e8;
+  --skill-4: #a35d44; --skill-4-soft: #f0dccf;
+  --skill-5: #77658e; --skill-5-soft: #e6e0ec;
+  --skill-6: #477769; --skill-6-soft: #d6e6e0;
+  --on-skill: #fffdf6;
+  --divider-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='22'><path d='M0 13c7-3 15-3 22 0s15 3 22 0' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'/><path d='M22 13c1-4.5 4-7 8.5-7.5-.5 4.5-3.6 7-8.5 7.5z'/></svg>");
+}
+[data-skin="moss"][data-theme="dark"], :root:not([data-skin])[data-theme="dark"] {
+  --bg: #1e211b;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='22'><path d='M2.5 3.5c1.6 3.4 3.6 6 6.5 8.6 2.9-2.6 4.9-5.2 6.5-8.6M2.5 14.5c1.6 3.4 3.6 6 6.5 8.6 2.9-2.6 4.9-5.2 6.5-8.6' fill='none' stroke='%23c9d6ae' stroke-opacity='.045' stroke-width='1.5' stroke-linecap='round'/></svg>");
+  --surface: #282c24;
+  --surface-2: #33372c;
+  --ink: #ebe8dc;
+  --ink-soft: #d0ccbe;
+  --muted: #a5a293;
+  --line: #40453a;
+  --accent: #a9bb87;
+  --accent-ink: #1c2116;
+  --accent-soft: #3a442f;
+  --ok: #9cc283;
+  --warn: #d9b25c;
+  --danger: #e68e7f;
+  --skill-1: #a6ba88; --skill-1-soft: #354030;
+  --skill-2: #cdbb7f; --skill-2-soft: #403b2a;
+  --skill-3: #a3b6c2; --skill-3-soft: #2f393f;
+  --skill-4: #dc9d82; --skill-4-soft: #45332b;
+  --skill-5: #b9a8cf; --skill-5-soft: #3a3444;
+  --skill-6: #8ec1b2; --skill-6-soft: #2b3e38;
+  --on-skill: #1b1e17;
+}
+/* мох: листик у заголовков секций */
+[data-skin="moss"] .section__title::before, :root:not([data-skin]) .section__title::before {
+  content: '';
+  flex: none;
+  width: 18px; height: 18px;
+  background: var(--accent);
+  opacity: .8;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.5 19.5C4 12 8.8 6 19.6 4.6c.6 10-5 15.3-12.7 15.1 2.8-4 5.6-6.9 8.6-9-3.6 1.7-7 4.6-11 8.8z'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M4.5 19.5C4 12 8.8 6 19.6 4.6c.6 10-5 15.3-12.7 15.1 2.8-4 5.6-6.9 8.6-9-3.6 1.7-7 4.6-11 8.8z'/></svg>") center / contain no-repeat;
+}
+
+/* ==========================================================================
+   2. ПРЯЖА И ЛЁН
+   ========================================================================== */
+[data-skin="linen"] {
+  --bg: #f4ece0;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='18'><g fill='%23a0522d' fill-opacity='.055'><ellipse cx='5' cy='9' rx='2.4' ry='5.6' transform='rotate(-30 5 9)'/><ellipse cx='11' cy='9' rx='2.4' ry='5.6' transform='rotate(30 11 9)'/></g></svg>");
+  --surface: #fcf7ef;
+  --surface-2: #f0e5d4;
+  --ink: #3a2c24;
+  --ink-soft: #594538;
+  --muted: #6f5b4e;
+  --line: #e3d4c0;
+  --accent: #ad5437;
+  --accent-ink: #fffaf3;
+  --accent-soft: #f4d9cb;
+  --ok: #577744;
+  --warn: #9a6c14;
+  --danger: #b03838;
+  --skill-1: #b2593c; --skill-1-soft: #f5dccf;
+  --skill-2: #66855b; --skill-2-soft: #dfe9d9;
+  --skill-3: #a87c1c; --skill-3-soft: #f3e5c0;
+  --skill-4: #5b7c94; --skill-4-soft: #dce6ee;
+  --skill-5: #88586f; --skill-5-soft: #efdde5;
+  --skill-6: #4b7d76; --skill-6-soft: #d6e8e4;
+  --on-skill: #fffaf3;
+  --radius: 18px;
+  --divider-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='22'><ellipse cx='4' cy='11' rx='1.7' ry='4' transform='rotate(-30 4 11)'/><ellipse cx='8' cy='11' rx='1.7' ry='4' transform='rotate(30 8 11)'/></svg>");
+}
+[data-skin="linen"][data-theme="dark"] {    /* «вечер у камина» */
+  --bg: #241a15;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='18'><g fill='%23f0b46a' fill-opacity='.03'><ellipse cx='5' cy='9' rx='2.4' ry='5.6' transform='rotate(-30 5 9)'/><ellipse cx='11' cy='9' rx='2.4' ry='5.6' transform='rotate(30 11 9)'/></g></svg>"),
+    radial-gradient(120% 60% at 50% 0%, rgb(224 164 86 / .07), transparent 70%);
+  --surface: #30241d;
+  --surface-2: #3b2e25;
+  --ink: #f3e7d7;
+  --ink-soft: #dac9b5;
+  --muted: #b09c88;
+  --line: #4c3b2f;
+  --accent: #e3a759;
+  --accent-ink: #261a10;
+  --accent-soft: #4c3520;
+  --ok: #abc690;
+  --warn: #e8bf62;
+  --danger: #ee917d;
+  --skill-1: #e59d7b; --skill-1-soft: #4a2e24;
+  --skill-2: #aac49c; --skill-2-soft: #33402f;
+  --skill-3: #e4be5f; --skill-3-soft: #463a1f;
+  --skill-4: #a2bed4; --skill-4-soft: #2f3b46;
+  --skill-5: #d69db8; --skill-5-soft: #43303a;
+  --skill-6: #92c4bb; --skill-6-soft: #2c403d;
+  --on-skill: #241a14;
+}
+/* лён: карточки «простёганы» по краю */
+[data-skin="linen"] .card { border-width: 1px; }
+[data-skin="linen"] .card::after {
+  content: '';
+  position: absolute; inset: 5px;
+  border: 1.5px dashed color-mix(in srgb, var(--skill, var(--accent)) 30%, transparent);
+  border-radius: calc(var(--radius) - 5px);
+  pointer-events: none;
+}
+[data-skin="linen"] .section__title::before {
+  content: '';
+  flex: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, rgb(255 255 255 / .35), transparent 45%),
+    repeating-linear-gradient(-35deg, var(--accent) 0 2px, color-mix(in srgb, var(--accent) 70%, var(--surface)) 2px 3.5px);
+  opacity: .85;
+}
+[data-skin="linen"] .progress__bar {
+  background-image: repeating-linear-gradient(-55deg, rgb(255 255 255 / .32) 0 2px, transparent 2px 4.5px, rgb(0 0 0 / .08) 4.5px 5.5px, transparent 5.5px 7px);
+}
+
+/* ==========================================================================
+   3. БОТАНИЧЕСКИЙ АЛЬБОМ
+   ========================================================================== */
+[data-skin="botanic"] {
+  --bg: #f8f3ea;
+  --bg-pattern:
+    radial-gradient(60% 40% at 100% 0%, rgb(214 160 166 / .16), transparent 70%),
+    radial-gradient(50% 35% at 0% 100%, rgb(150 165 110 / .12), transparent 70%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45 0 0 0 0 .35 0 0 0 0 .25 0 0 0 .09 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  --surface: #fffcf6;
+  --surface-2: #f3ebdf;
+  --ink: #3a3330;
+  --ink-soft: #574d48;
+  --muted: #72665e;
+  --line: #e7dccd;
+  --accent: #a0585f;
+  --accent-ink: #fffaf7;
+  --accent-soft: #f4e0e0;
+  --ok: #5a7638;
+  --warn: #9c6c1e;
+  --danger: #ad3a3a;
+  --skill-1: #ad6169; --skill-1-soft: #f5e1e2;
+  --skill-2: #6c7a42; --skill-2-soft: #e5e9d3;
+  --skill-3: #7d68a0; --skill-3-soft: #e8e2f1;
+  --skill-4: #567c95; --skill-4-soft: #dde8ef;
+  --skill-5: #a47528; --skill-5-soft: #f3e6cb;
+  --skill-6: #4b7c6c; --skill-6-soft: #d9e9e2;
+  --on-skill: #fffdf8;
+  --radius: 22px;
+  --divider-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='22'><path d='M3 11h11M22 11h11' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/><circle cx='18' cy='11' r='2.4'/><circle cx='18' cy='6.6' r='1.4'/><circle cx='18' cy='15.4' r='1.4'/></svg>");
+}
+[data-skin="botanic"][data-theme="dark"] {
+  --bg: #211d1d;
+  --bg-pattern:
+    radial-gradient(60% 40% at 100% 0%, rgb(226 162 168 / .07), transparent 70%),
+    radial-gradient(50% 35% at 0% 100%, rgb(181 194 136 / .05), transparent 70%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 .95 0 0 0 0 .9 0 0 0 .05 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  --surface: #2b2626;
+  --surface-2: #362f2f;
+  --ink: #f1e9e2;
+  --ink-soft: #d8ccc4;
+  --muted: #ab9e96;
+  --line: #473f3d;
+  --accent: #e3a3a9;
+  --accent-ink: #2a1d1f;
+  --accent-soft: #4b3235;
+  --ok: #b0c98a;
+  --warn: #e4c06d;
+  --danger: #f0928a;
+  --skill-1: #e3a1a8; --skill-1-soft: #47302f;
+  --skill-2: #b6c389; --skill-2-soft: #383c28;
+  --skill-3: #c0abe1; --skill-3-soft: #3a3348;
+  --skill-4: #9fc3d9; --skill-4-soft: #2c3b44;
+  --skill-5: #e3be79; --skill-5-soft: #463a26;
+  --skill-6: #94c5b5; --skill-6-soft: #2b3f39;
+  --on-skill: #221d1d;
+}
+/* ботаника: акварельное пятно в углу карточки и цветочек у заголовков */
+[data-skin="botanic"] .card {
+  background-image: radial-gradient(140px 90px at 100% 0%, color-mix(in srgb, var(--skill-soft, var(--accent-soft)) 85%, transparent), transparent 75%);
+}
+[data-skin="botanic"] .section__title::before {
+  content: '';
+  flex: none;
+  width: 18px; height: 18px;
+  background: var(--accent);
+  opacity: .75;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><circle cx='12' cy='6' r='4'/><circle cx='18' cy='11' r='4'/><circle cx='15.5' cy='18' r='4'/><circle cx='8.5' cy='18' r='4'/><circle cx='6' cy='11' r='4'/></g></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><circle cx='12' cy='6' r='4'/><circle cx='18' cy='11' r='4'/><circle cx='15.5' cy='18' r='4'/><circle cx='8.5' cy='18' r='4'/><circle cx='6' cy='11' r='4'/></g></svg>") center / contain no-repeat;
+}
+
+/* ==========================================================================
+   4. СКАНДИНАВСКИЙ СВИТЕР
+   ========================================================================== */
+[data-skin="nordic"] {
+  --bg: #f3f1ec;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><g fill='%232f4a73' fill-opacity='.075'><path d='M6 4.5h2v2h2v2H8v2H6v-2H4v-2h2z'/><path d='M20 18.5h2v2h2v2h-2v2h-2v-2h-2v-2h2z'/></g></svg>");
+  --surface: #fdfcf9;
+  --surface-2: #ebe8e0;
+  --ink: #1d2a3e;
+  --ink-soft: #36455c;
+  --muted: #5a6577;
+  --line: #dad6cc;
+  --accent: #2f4a73;
+  --accent-ink: #fbfaf6;
+  --accent-soft: #dce4ef;
+  --ok: #3b7050;
+  --warn: #946512;
+  --danger: #b0313d;
+  --skill-1: #2f4a73; --skill-1-soft: #dce4ef;
+  --skill-2: #b0313d; --skill-2-soft: #f5dadc;
+  --skill-3: #3a6c5a; --skill-3-soft: #d9e9e2;
+  --skill-4: #4a7aa3; --skill-4-soft: #dce8f2;
+  --skill-5: #977020; --skill-5-soft: #f1e6c9;
+  --skill-6: #6b578a; --skill-6-soft: #e6e0ef;
+  --on-skill: #fdfcf9;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --divider-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='22'><path d='M0 15l4-7 4 7 4-7 4 7' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'/></svg>");
+}
+[data-skin="nordic"][data-theme="dark"] {
+  --bg: #151d2b;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><g fill='%23dfe8f5' fill-opacity='.05'><path d='M6 4.5h2v2h2v2H8v2H6v-2H4v-2h2z'/><path d='M20 18.5h2v2h2v2h-2v2h-2v-2h-2v-2h2z'/></g></svg>");
+  --surface: #1d2738;
+  --surface-2: #273348;
+  --ink: #edf0f4;
+  --ink-soft: #c9d1dc;
+  --muted: #98a4b5;
+  --line: #34425a;
+  --accent: #a9c2e6;
+  --accent-ink: #132036;
+  --accent-soft: #2c3e5d;
+  --ok: #93c9a4;
+  --warn: #e2bf6a;
+  --danger: #f08a92;
+  --skill-1: #a9c2e6; --skill-1-soft: #2b3d5c;
+  --skill-2: #f0939b; --skill-2-soft: #4a2a33;
+  --skill-3: #8fcab3; --skill-3-soft: #24433a;
+  --skill-4: #9cc6ea; --skill-4-soft: #24405a;
+  --skill-5: #e6c370; --skill-5-soft: #463b22;
+  --skill-6: #c3b1e3; --skill-6-soft: #3a3352;
+  --on-skill: #141c2a;
+}
+/* норвежский свитер: вязаная «кайма» сверху карточки навыка, звёздочка у заголовков */
+[data-skin="nordic"] .card--skill { padding-top: 22px; overflow: hidden; }
+[data-skin="nordic"] .card--skill::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 9px;
+  background: var(--skill, var(--accent));
+  opacity: .85;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='9'><path d='M0 0h12v3l-3 3-3-3-3 3-3-3z M5 7h2v2H5z'/></svg>") 0 0 / 12px 9px repeat-x;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='9'><path d='M0 0h12v3l-3 3-3-3-3 3-3-3z M5 7h2v2H5z'/></svg>") 0 0 / 12px 9px repeat-x;
+}
+[data-skin="nordic"] .section__title::before {
+  content: '';
+  flex: none;
+  width: 16px; height: 16px;
+  background: var(--skill-2);
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M7 0h2v5l3-3 1.4 1.4-3 3H16v2h-5.6l3 3L12 14l-3-3v5H7v-5l-3 3-1.4-1.4 3-3H0v-2h5.6l-3-3L4 2l3 3z'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M7 0h2v5l3-3 1.4 1.4-3 3H16v2h-5.6l3 3L12 14l-3-3v5H7v-5l-3 3-1.4-1.4 3-3H0v-2h5.6l-3-3L4 2l3 3z'/></svg>") center / contain no-repeat;
+}
+
+/* ==========================================================================
+   5. ЯПОНСКАЯ ТЕТРАДЬ (самая спокойная)
+   ========================================================================== */
+[data-skin="sashiko"] {
+  --bg: #f4efe4;
+  --bg-pattern:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='24'><g fill='none' stroke='%2333456b' stroke-opacity='.06' stroke-width='1.1' stroke-dasharray='3 2.4' stroke-linecap='round'><path d='M0 24a24 24 0 0 1 48 0M8 24a16 16 0 0 1 32 0M16 24a8 8 0 0 1 16 0'/><path d='M-24 12a24 24 0 0 1 48 0M-16 12a16 16 0 0 1 32 0M-8 12a8 8 0 0 1 16 0M24 12a24 24 0 0 1 48 0M32 12a16 16 0 0 1 32 0M40 12a8 8 0 0 1 16 0'/></g></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.04 .6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .35 0 0 0 .07 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  --surface: #fcf9f2;
+  --surface-2: #ede7da;
+  --ink: #232a3a;
+  --ink-soft: #3e4659;
+  --muted: #5f6577;
+  --line: #ddd6c7;
+  --accent: #33456b;
+  --accent-ink: #fbf9f3;
+  --accent-soft: #dfe3ec;
+  --ok: #4a7656;
+  --warn: #96671b;
+  --danger: #ab4639;
+  --skill-1: #3d5180; --skill-1-soft: #dfe4ef;
+  --skill-2: #b8694a; --skill-2-soft: #f6e0d5;
+  --skill-3: #627659; --skill-3-soft: #e1e8db;
+  --skill-4: #835e78; --skill-4-soft: #eee1ea;
+  --skill-5: #977429; --skill-5-soft: #f1e6cc;
+  --skill-6: #557989; --skill-6-soft: #dce8ed;
+  --on-skill: #fcf9f2;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --divider-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='22'><path d='M2.5 11h6' stroke='%23000' stroke-width='2' stroke-linecap='round'/></svg>");
+}
+[data-skin="sashiko"][data-theme="dark"] {
+  --bg: #181c26;
+  --bg-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='24'><g fill='none' stroke='%23e8dcc8' stroke-opacity='.045' stroke-width='1.1' stroke-dasharray='3 2.4' stroke-linecap='round'><path d='M0 24a24 24 0 0 1 48 0M8 24a16 16 0 0 1 32 0M16 24a8 8 0 0 1 16 0'/><path d='M-24 12a24 24 0 0 1 48 0M-16 12a16 16 0 0 1 32 0M-8 12a8 8 0 0 1 16 0M24 12a24 24 0 0 1 48 0M32 12a16 16 0 0 1 32 0M40 12a8 8 0 0 1 16 0'/></g></svg>");
+  --surface: #20252f;
+  --surface-2: #2a303d;
+  --ink: #ece8e0;
+  --ink-soft: #cdc8bf;
+  --muted: #9c9da5;
+  --line: #373e4e;
+  --accent: #e8b196;
+  --accent-ink: #1f1a19;
+  --accent-soft: #433638;
+  --ok: #a3c9a5;
+  --warn: #e2c27c;
+  --danger: #ee9a8a;
+  --skill-1: #a9b7de; --skill-1-soft: #2d3550;
+  --skill-2: #ebb092; --skill-2-soft: #45332c;
+  --skill-3: #b3c3a8; --skill-3-soft: #323b2f;
+  --skill-4: #d2aac4; --skill-4-soft: #3f3240;
+  --skill-5: #e2c27c; --skill-5-soft: #433b25;
+  --skill-6: #9fc0d0; --skill-6-soft: #2a3a42;
+  --on-skill: #181c26;
+}
+/* сасико: тонкая «прошивка» по краю карточки и крестик-стежок у заголовков */
+[data-skin="sashiko"] .card { box-shadow: none; border-color: var(--line); }
+[data-skin="sashiko"] .card::after {
+  content: '';
+  position: absolute; inset: 4px;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px dashed color-mix(in srgb, var(--skill, var(--accent)) 22%, transparent);
+  pointer-events: none;
+}
+[data-skin="sashiko"] .section__title::before {
+  content: '';
+  flex: none;
+  width: 14px; height: 14px;
+  background: var(--skill-2);
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M7 1v4.5M7 8.5V13M1 7h4.5M8.5 7H13' stroke='%23000' stroke-width='2.2' stroke-linecap='round'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M7 1v4.5M7 8.5V13M1 7h4.5M8.5 7H13' stroke='%23000' stroke-width='2.2' stroke-linecap='round'/></svg>") center / contain no-repeat;
+}
+[data-skin="sashiko"] .progress__bar { background-image: repeating-linear-gradient(90deg, rgb(255 255 255 / .28) 0 5px, transparent 5px 9px); }
+[data-skin="sashiko"][data-theme="dark"] .progress__bar { background-image: repeating-linear-gradient(90deg, rgb(0 0 0 / .18) 0 5px, transparent 5px 9px); }

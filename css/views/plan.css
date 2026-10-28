@@ -1,0 +1,41 @@
+/* Экран «План» */
+
+.plan { min-width: 0; }
+.plan .page-head__sub { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.plan-now { font-size: 0.75rem; }
+
+.plan-tabs { scroll-behavior: smooth; }
+.plan-tab { position: relative; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.plan-tab__now {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+.plan-tab__ok { color: var(--ok); width: 16px; height: 16px; }
+.plan-tab--extend {
+  display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+  border-style: dashed;
+  color: var(--accent);
+}
+.plan-tab--extend .ico { width: 18px; height: 18px; }
+
+.plan-overall { display: flex; flex-direction: column; gap: 8px; }
+.plan-overall .big-num { line-height: 1; }
+
+.plan-skill .card__head { align-items: center; }
+.plan-skill__title { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.plan-skill__title .card__title { overflow-wrap: anywhere; }
+.plan-skill > .progress { margin: 2px 0 8px; }
+
+.plan-tasks { margin: 0; padding: 0; list-style: none; }
+.plan-tasks .task { min-width: 0; }
+.plan-tasks .task__text {
+  flex: 1; min-width: 0; min-height: 40px;
+  border: 0; background: none; padding: 4px 4px 6px;
+  font: inherit; text-align: left; cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.plan-tasks .task__check { flex: none; }
+.plan-tasks .task__actions { flex: none; }
+
+.plan-empty { margin: 4px 0; }

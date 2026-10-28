@@ -1,0 +1,31 @@
+rules_version = '2';
+
+// Трекер обучения: каждый пользователь видит и меняет только свои данные.
+// Путь: users/{uid}/records/{col}__{id}
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validRecord(d) {
+      return d.updatedAt is number
+        && d.col in ['settings', 'skills', 'tasks', 'days', 'journal', 'checklist', 'metrics', 'summaries']
+        && d.id is string
+        && (!('deleted' in d) || d.deleted is bool);
+    }
+
+    match /users/{userId}/records/{docId} {
+      allow read: if isOwner(userId);
+      // Записи не удаляются физически: удаление — «надгробие» deleted: true.
+      allow create, update: if isOwner(userId) && validRecord(request.resource.data);
+      allow delete: if false;
+    }
+
+    // Всё остальное закрыто (правила Firestore по умолчанию запрещают доступ).
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
