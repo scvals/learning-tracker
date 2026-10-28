@@ -103,6 +103,7 @@ function init() {
   applyAppearance();
 
   document.getElementById('sync-badge')?.addEventListener('click', () => navigate('settings'));
+  document.getElementById('learn-link')?.replaceChildren(ico('book'));
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyAppearance);
   window.addEventListener('hashchange', render);
 

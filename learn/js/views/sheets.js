@@ -10,9 +10,12 @@ import { pageHead, loader, soon, skillClass } from './common.js';
 
 const KEY = 'stages';
 
+const SIZE_KEY = 'sheets:opts';
+const sizeOpt = () => (progress.getRec(SIZE_KEY).size === 'school' ? 'school' : 'large');
+
 function sheetSvg(ws, id) {
   try {
-    const str = ws.renderSheet ? ws.renderSheet(id, {}) : null;
+    const str = ws.renderSheet ? ws.renderSheet(id, { size: sizeOpt(), hand: 'left' }) : null;
     return str ? cleanSvg(str) : null;
   } catch (e) {
     console.warn('renderSheet', id, e);
@@ -28,12 +31,12 @@ export async function render(root, ctx) {
   if (!ctx.alive()) return;
   wait.remove();
   if (!ws || (!ws.sheets.length && !ws.stageCriteria.length)) { root.append(soon('Прописи скоро появятся')); return; }
+  const sheetsHost = h('div');
+  const drawSheets = () => sheetsHost.replaceChildren(sheetList());
 
   const sheets = ws.sheets.filter((s) => s && s.id).sort((a, b) => (Number(a.week) || 0) - (Number(b.week) || 0));
-  if (sheets.length) {
-    root.append(h('div', { class: 'hint-box' }, lico('print'),
-      h('span', null, 'Нажми «Распечатать». На телефоне в окне печати можно выбрать «Сохранить как PDF». Масштаб — 100%, размер — A4.')));
-    root.append(h('div', { class: 'ln-sheets' }, sheets.map((s) => {
+  function sheetList() {
+    return h('div', { class: 'ln-sheets' }, sheets.map((s) => {
       const thumb = sheetSvg(ws, s.id);
       return h('article', { class: `card ln-sheet ${skillClass('left')}` },
         h('button', { class: 'ln-sheet__thumb', type: 'button', 'aria-label': `Посмотреть лист: ${plain(s.title)}`, onclick: () => preview(ws, s) },
@@ -45,7 +48,36 @@ export async function render(root, ctx) {
           h('div', { class: 'row row--wrap ln-sheet__btns' },
             h('button', { class: 'btn btn--primary btn--sm', type: 'button', onclick: () => openPrint(ws, s) }, lico('print'), h('span', null, 'Распечатать / PDF')),
             h('button', { class: 'btn btn--ghost btn--sm', type: 'button', onclick: () => preview(ws, s) }, lico('eye'), h('span', null, 'Посмотреть')))));
-    })));
+    }));
+  }
+  if (sheets.length) {
+    const seg = h('div', { class: 'segmented', role: 'radiogroup', 'aria-label': 'Размер линовки' });
+    const paintSeg = () => seg.replaceChildren(...[['large', 'Крупная (6 мм)'], ['school', 'Школьная']].map(([v, label]) => h('button', {
+      class: `segmented__btn${sizeOpt() === v ? ' is-active' : ''}`, type: 'button', role: 'radio', 'aria-checked': String(sizeOpt() === v),
+      onclick: () => { progress.setRec(SIZE_KEY, { size: v }); paintSeg(); drawSheets(); } }, label)));
+    paintSeg();
+    root.append(
+      h('div', { class: 'hint-box' }, lico('print'),
+        md('Нажми «Распечатать». В окне печати поставь **Масштаб: 100%** (не «Подогнать по размеру»), бумага A4. На телефоне там же можно выбрать «Сохранить как PDF».')),
+      h('div', { class: 'field ln-sheet-size' }, h('span', { class: 'field__label' }, 'Размер линовки'), seg,
+        h('span', { class: 'field__hint' }, 'Начни с крупной версии — так левой руке легче. Школьная — когда буквы станут ровными.')),
+      sheetsHost);
+    drawSheets();
+  }
+
+  if (ws.controlText || ws.legibilityScale) {
+    const scale = Array.isArray(ws.legibilityScale) ? ws.legibilityScale : [];
+    root.append(h('section', { class: 'section' },
+      h('h2', { class: 'section__title' }, 'Контрольный текст'),
+      h('div', { class: 'card card--skill sk-3 stack stack--sm' },
+        typeof ws.controlText === 'string' && h('blockquote', { class: 'ln-control' }, ws.controlText),
+        h('ol', { class: 'ln-numlist' },
+          h('li', null, 'Раз в неделю перепиши этот текст левой рукой в обычном спокойном темпе.'),
+          h('li', null, 'Засеки время секундомером и запиши секунды в журнал трекера: «Время на контрольный текст».'),
+          h('li', null, 'Через час перечитай и оцени разборчивость по шкале ниже — это «Разборчивость» в журнале.')),
+        scale.length > 0 && h('div', { class: 'ln-scale' }, scale.map((x) => h('div', { class: 'ln-scale__row' },
+          h('span', { class: 'ln-scale__n' }, String(x.score)),
+          h('span', null, h('strong', null, x.label), x.text && h('span', { class: 'small muted' }, ` — ${x.text}`))))))));
   }
 
   if (ws.stageCriteria.length) {
@@ -107,7 +139,7 @@ export function openPrint(ws, s) {
   svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
   host.replaceChildren(
     h('div', { class: 'ln-print-bar' },
-      h('div', { class: 'ln-print-bar__text' }, h('strong', null, plain(s.title)), h('span', { class: 'small muted' }, 'Лист A4. В окне печати можно выбрать «Сохранить как PDF».')),
+      h('div', { class: 'ln-print-bar__text' }, h('strong', null, plain(s.title)), h('span', { class: 'small muted' }, 'A4 · Масштаб 100% · можно «Сохранить как PDF»')),
       h('div', { class: 'row' },
         h('button', { class: 'btn btn--ghost', type: 'button', onclick: closePrint }, ico('close'), h('span', null, 'Закрыть')),
         h('button', { class: 'btn btn--primary', type: 'button', onclick: () => window.print() }, lico('print'), h('span', null, 'Печать')))),

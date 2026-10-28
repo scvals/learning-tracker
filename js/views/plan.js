@@ -6,6 +6,19 @@ import { weekRange, formatShort, plural } from '../dates.js';
 
 const TASKS = ['задание', 'задания', 'заданий'];
 
+// Уроки (learn/) для заданий: «Как сделать». Грузится лениво, без уроков экран работает как обычно.
+let lessonMap = null;
+let lessonMapPromise = null;
+function loadLessonMap() {
+  if (!lessonMapPromise) {
+    lessonMapPromise = import('../../learn/js/task-map.js')
+      .then((m) => m.lessonMap())
+      .then((map) => { lessonMap = map; return map; })
+      .catch(() => { lessonMap = new Map(); return lessonMap; });
+  }
+  return lessonMapPromise;
+}
+
 export function render(root, ctx) {
   const weeks = store.planWeeks();
   const start = store.settings().startDate;
@@ -70,6 +83,7 @@ export function render(root, ctx) {
 
     headEl.replaceChildren(h('div', { class: 'page-head' },
       h('h1', { class: 'h1 page-head__title' }, 'План'),
+      h('a', { class: 'icon-btn page-help', href: 'learn/#/guide/plan', 'aria-label': 'Как пользоваться экраном «План»', title: 'Как пользоваться' }, ico('info')),
       h('div', { class: 'page-head__sub' },
         `Неделя ${week} из ${store.planWeeks()}`,
         range && ` · ${formatShort(range[0])} – ${formatShort(range[1])}`,
@@ -117,7 +131,10 @@ export function render(root, ctx) {
       h('button', { class: 'task__check', type: 'button', role: 'checkbox', 'aria-checked': t.done ? 'true' : 'false',
         'aria-label': t.done ? `Снять отметку: ${t.text}` : `Отметить выполненным: ${t.text}`,
         onclick: () => { store.patch('tasks', t.id, { done: !t.done }); refresh(); } }, ico('check')),
-      h('button', { class: 'task__text', type: 'button', onclick: () => editTask(t) }, t.text),
+      h('div', { class: 'plan-task__main' },
+        h('button', { class: 'task__text', type: 'button', onclick: () => editTask(t) }, t.text),
+        lessonMap?.get(t.id) && h('a', { class: 'plan-howto', href: `learn/#/lesson/${encodeURIComponent(lessonMap.get(t.id))}` },
+          ico('book', 'ico ico--sm'), h('span', null, 'Как сделать'))),
       h('div', { class: 'task__actions' },
         h('button', { class: 'icon-btn icon-btn--sm', type: 'button', 'aria-label': `Действия: ${t.text}`, onclick: () => menu(t, i, list) }, ico('more'))));
   }
@@ -210,4 +227,5 @@ export function render(root, ctx) {
 
   drawTabs();
   draw();
+  if (!lessonMap) loadLessonMap().then((map) => { if (map.size && root.isConnected) draw(); });
 }

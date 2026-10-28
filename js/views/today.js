@@ -96,6 +96,7 @@ export function render(root, ctx) {
     headEl.replaceChildren(
       h('div', { class: 'page-head' },
         h('h1', { class: 'h1 page-head__title' }, 'Сегодня'),
+      h('a', { class: 'icon-btn page-help', href: 'learn/#/guide/today', 'aria-label': 'Как пользоваться экраном «Сегодня»', title: 'Как пользоваться' }, ico('info')),
         h('div', { class: 'page-head__sub' },
           h('span', { class: 'today-date' }, formatLong(today)),
           h('span', { class: 'today-week muted' }, sub))),

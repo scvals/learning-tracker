@@ -51,7 +51,8 @@ export function render(root, ctx) {
     h('div', { class: 'page-head' },
       h('div', null,
         h('h1', { class: 'h1 page-head__title' }, 'Журнал'),
-        h('div', { class: 'page-head__sub muted' }, `Неделя ${week}${sub ? ' · ' + sub : ''}`))));
+        h('div', { class: 'page-head__sub muted' }, `Неделя ${week}${sub ? ' · ' + sub : ''}`)),
+      h('a', { class: 'icon-btn page-help', href: 'learn/#/guide/journal', 'aria-label': 'Как заполнять журнал', title: 'Как заполнять журнал' }, ico('info'))));
 
   const tabs = h('div', { class: 'tabs jr-tabs', role: 'tablist', 'aria-label': 'Недели' },
     Array.from({ length: weeks }, (_, i) => i + 1).map((w) => h('button', {

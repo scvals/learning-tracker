@@ -544,3 +544,9 @@ body.is-printing { overflow: hidden; }
 @media (max-width: 359px) {
   .ln-back { padding: 0 8px; font-size: .85rem; }
 }
+
+.ln-sheet-size { margin-top: 12px; }
+.ln-control { margin: 0; padding: 12px 14px; border-left: 4px solid var(--skill); border-radius: var(--radius-sm); background: var(--surface-2); font-size: 1.1rem; color: var(--ink); }
+.ln-scale { display: flex; flex-direction: column; gap: 6px; }
+.ln-scale__row { display: flex; gap: 10px; align-items: flex-start; }
+.ln-scale__n { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--skill); color: var(--on-skill); font-family: var(--font-hand); font-size: 1.3rem; font-weight: 700; }

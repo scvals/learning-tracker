@@ -28,6 +28,7 @@ export function render(root, ctx) {
   root.append(h('div', { class: 'summary stack' },
     h('div', { class: 'page-head' },
       h('h1', { class: 'h1 page-head__title' }, 'Итоги'),
+      h('a', { class: 'icon-btn page-help', href: 'learn/#/guide/summary', 'aria-label': 'Как пользоваться экраном «Итоги»', title: 'Как пользоваться' }, ico('info')),
       h('div', { class: 'page-head__sub' }, subText, range && ` · ${formatShort(range[0])} – ${formatShort(range[1])}`)),
     s.finishedAt && h('div', { class: 'card summary-finished' },
       h('div', { class: 'summary-finished__art', 'aria-hidden': 'true', html: safeDecor('celebrate', s.skin) }),
