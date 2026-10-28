@@ -191,7 +191,7 @@ export function render(root, ctx) {
     // --- отметка ---
     const toggle = h('button', { class: 'check-toggle check-toggle--wide', type: 'button', onclick: () => setDone(!rec().done) },
       ico('check'),
-      h('span', { class: 'check-toggle__label' }, 'Занимался'));
+      h('span', { class: 'check-toggle__label' }, 'Сделано'));
 
     function setDone(done) {
       store.setDay(selected, skill.id, { done });
@@ -215,7 +215,7 @@ export function render(root, ctx) {
       if (n === 0) n = null;
       const partial = { minutes: n };
       const wasDone = !!rec().done;
-      if (n && !wasDone) partial.done = true; // указали время — значит занимался
+      if (n && !wasDone) partial.done = true; // указали время — значит, занятие было
       store.setDay(selected, skill.id, partial);
       if (fromButton || document.activeElement !== minInput) minInput.value = n ?? '';
       if (partial.done) { updateCard(); drawStrip(); drawProgress(); }

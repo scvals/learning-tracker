@@ -194,7 +194,7 @@ export function render(root, ctx) {
         h('span', { class: 'summary-dayrow__icon' }, ico(r.done ? 'check' : sk.icon || 'star')),
         h('div', { class: 'summary-dayrow__text' },
           h('strong', null, sk.name),
-          h('span', { class: 'small muted' }, r.done ? `занимался${r.minutes ? ` · ${r.minutes} мин` : ''}` : r.minutes ? `${r.minutes} мин, без отметки` : 'не отмечено'),
+          h('span', { class: 'small muted' }, r.done ? `сделано${r.minutes ? ` · ${r.minutes} мин` : ''}` : r.minutes ? `${r.minutes} мин, без отметки` : 'не отмечено'),
           r.note && h('span', { class: 'small summary-dayrow__note' }, r.note)));
     });
     const w = weekOf(d, start);

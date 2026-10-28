@@ -44,6 +44,13 @@ export function load() {
     console.warn('Не удалось прочитать локальные данные', e);
   }
   if (!db.settings.main) seed();
+  renameOldLabels();
+}
+
+// Старые названия показателей → нейтральные (для данных, созданных прежней версией).
+function renameOldLabels() {
+  const map = { 'Записал минутный рассказ': 'Минутный рассказ записан', 'Понял в контрольном видео': 'Понято в контрольном видео' };
+  for (const m of Object.values(db.metrics)) if (m && map[m.label]) m.label = map[m.label];
 }
 
 function persist() {

@@ -108,7 +108,7 @@ export function render(root, ctx) {
       if (rec?.done) done++;
       if (rec && Number(rec.minutes) > 0) minutes += Number(rec.minutes);
     }
-    const parts = [`занимался ${done} из 7 дней`];
+    const parts = [`занятия: ${done} из 7 дней`];
     if (minutes) parts.push(`${minutes} мин`);
     return h('div', { class: 'small muted jr-stats' }, ico('calendar', 'ico ico--sm'), ' ', parts.join(' · '));
   }

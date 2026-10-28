@@ -56,7 +56,7 @@ export async function render(root, ctx) {
     if (!next) {
       contEl.replaceChildren(h('div', { class: 'card ln-continue is-all-done' },
         h('div', { class: 'ln-continue__art', 'aria-hidden': 'true', html: safeDecor('celebrate') }),
-        h('p', { class: 'hand ln-continue__done' }, 'Все уроки пройдены — ты огромный молодец!')));
+        h('p', { class: 'hand ln-continue__done' }, 'Все уроки пройдены — огромное достижение!')));
       return;
     }
     const sk = content.skillInfo(next.skillId);

@@ -70,9 +70,9 @@ export function defaultMetrics() {
     { id: 'm_left_time', skillId: 'left', label: 'Время на контрольный текст', type: 'number', unit: 'сек', order: 2, lowerIsBetter: true },
     { id: 'm_left_legibility', skillId: 'left', label: 'Разборчивость', type: 'scale', unit: '', order: 3 },
     { id: 'm_eng_anki', skillId: 'eng', label: 'Слов в Anki всего', type: 'number', unit: '', order: 1 },
-    { id: 'm_eng_video', skillId: 'eng', label: 'Понял в контрольном видео', type: 'percent', unit: '%', order: 2,
+    { id: 'm_eng_video', skillId: 'eng', label: 'Понято в контрольном видео', type: 'percent', unit: '%', order: 2,
       optional: true, hint: 'Необязательно, раз в 2 недели' },
-    { id: 'm_eng_story', skillId: 'eng', label: 'Записал минутный рассказ', type: 'bool', order: 3 },
+    { id: 'm_eng_story', skillId: 'eng', label: 'Минутный рассказ записан', type: 'bool', order: 3 },
   ];
 }
 

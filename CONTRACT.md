@@ -77,7 +77,7 @@ export function render(root, ctx) { /* root — пустой <main>; ctx = { par
 - Раскладка: `.page-head` (`.page-head__title`, `.page-head__sub`, `.page-head__actions`), `.section`, `.section__title`, `.stack`, `.stack--sm`, `.row`, `.row--between`, `.row--wrap`, `.grid-2`, `.spacer`
 - Карточки: `.card`, `.card--skill` + класс цвета навыка `.sk-1 … .sk-6` (задают `--skill`, `--skill-soft`), `.card__head`, `.card__title`, `.card__icon`, `.card__body`, `.card__foot`
 - Кнопки: `.btn`, `.btn--primary`, `.btn--ghost`, `.btn--danger`, `.btn--sm`, `.btn--block`, `.icon-btn`, `.icon-btn--sm`, `.chips`, `.chip(.is-active)`, `.fab`
-- Формы: `.form .field .field--inline .field__label .field__hint .input .checkbox .switch`, `.check-toggle(.is-on)` (большая кнопка «занимался»), `.stepper` (`.stepper__btn`, `.stepper__value`), `.segmented` (`.segmented__btn.is-active`), `.scale` (кнопки 1–5, `.scale__btn.is-active`)
+- Формы: `.form .field .field--inline .field__label .field__hint .input .checkbox .switch`, `.check-toggle(.is-on)` (большая кнопка «Сделано»), `.stepper` (`.stepper__btn`, `.stepper__value`), `.segmented` (`.segmented__btn.is-active`), `.scale` (кнопки 1–5, `.scale__btn.is-active`)
 - Списки: `.list`, `.list__item`, `.task(.is-done)` (`.task__check`, `.task__text`, `.task__actions`), `.check-item(.is-done .is-carried)`
 - Прогресс: `.progress` > `.progress__bar` (style width %), `.progress--skill`; `.ring` (svg-кольцо, если нужно)
 - Вкладки: `.tabs` (горизонтальная прокрутка) > `.tab(.is-active)`

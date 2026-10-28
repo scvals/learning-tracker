@@ -461,7 +461,7 @@ input.switch:checked, .switch input:checked {
 }
 label.switch { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; }
 
-/* Главная кнопка экрана «Сегодня»: «занимался». Круглая, со «стежком» по краю. */
+/* Главная кнопка экрана «Сегодня»: «Сделано». Круглая, со «стежком» по краю. */
 .check-toggle {
   --ct: var(--skill, var(--accent));
   --ct-soft: var(--skill-soft, var(--accent-soft));
