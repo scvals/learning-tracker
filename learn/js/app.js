@@ -174,3 +174,8 @@ function init() {
 }
 
 init();
+
+// Офлайн-режим: общий сервис-воркер трекера (лежит уровнем выше и обслуживает обе страницы).
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('../sw.js', { scope: '../' }).catch((e) => console.warn('SW', e));
+}

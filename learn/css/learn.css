@@ -550,3 +550,20 @@ body.is-printing { overflow: hidden; }
 .ln-scale { display: flex; flex-direction: column; gap: 6px; }
 .ln-scale__row { display: flex; gap: 10px; align-items: flex-start; }
 .ln-scale__n { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--skill); color: var(--on-skill); font-family: var(--font-hand); font-size: 1.3rem; font-weight: 700; }
+
+.ln-links { display: flex; flex-direction: column; gap: 8px; }
+.ln-link { justify-content: flex-start; white-space: normal; text-align: left; min-height: 50px; padding: 8px 16px; }
+.ln-link > span:nth-child(2) { flex: 1; }
+.ln-price { display: inline-flex; align-items: center; gap: 4px; color: var(--ink); }
+.ln-price .ico { color: var(--warn); }
+.ln-care .ln-kv__v { text-align: left; flex: 1 1 100%; }
+.ln-care .ln-kv__k { flex: 1 1 100%; }
+.ln-calc-wrap { margin-top: 12px; }
+.ln-calc__big { display: flex; align-items: baseline; gap: 6px; font-weight: 700; color: var(--ink); }
+.ln-calc__out { display: flex; flex-direction: column; gap: 6px; }
+.ln-yarn__art { margin: 2px 0; }
+.ln-step .ln-art, .ln-yarn .ln-art { color: var(--ink); }
+
+.ln-dur .segmented__btn { padding: 0 4px; }
+.ln-nowrap { white-space: nowrap; flex: none; }
+.ln-words-week__head { align-items: flex-start; }

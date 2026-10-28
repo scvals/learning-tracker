@@ -1,7 +1,7 @@
 // Сервис-воркер: приложение открывается и работает без интернета.
 // При изменении файлов приложения увеличьте VERSION — телефон подхватит обновление.
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = `tracker-${VERSION}`;
 
 const SHELL = [
@@ -41,6 +41,43 @@ const SHELL = [
   './js/views/settings.js',
   './js/views/summary.js',
   './js/views/today.js',
+  './learn/content/eng-art.js',
+  './learn/content/eng-dialogs.js',
+  './learn/content/eng-words.js',
+  './learn/content/eng.js',
+  './learn/content/glossary-eng.js',
+  './learn/content/glossary-knit.js',
+  './learn/content/glossary-left.js',
+  './learn/content/guide.js',
+  './learn/content/knit-art.js',
+  './learn/content/knit-extra.js',
+  './learn/content/knit.js',
+  './learn/content/left-art.js',
+  './learn/content/left-worksheets.js',
+  './learn/content/left.js',
+  './learn/css/learn.css',
+  './learn/index.html',
+  './learn/js/app.js',
+  './learn/js/art.js',
+  './learn/js/content.js',
+  './learn/js/lic.js',
+  './learn/js/markup.js',
+  './learn/js/progress.js',
+  './learn/js/speech.js',
+  './learn/js/task-map.js',
+  './learn/js/timer.js',
+  './learn/js/views/common.js',
+  './learn/js/views/dialogs.js',
+  './learn/js/views/glossary.js',
+  './learn/js/views/guide.js',
+  './learn/js/views/lesson.js',
+  './learn/js/views/more.js',
+  './learn/js/views/path.js',
+  './learn/js/views/session.js',
+  './learn/js/views/sheets.js',
+  './learn/js/views/shop.js',
+  './learn/js/views/skill.js',
+  './learn/js/views/words.js',
 ];
 
 self.addEventListener('install', (event) => {

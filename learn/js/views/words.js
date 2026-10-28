@@ -54,7 +54,7 @@ export async function render(root, ctx) {
     const kw = ww.filter(known).length;
     const pct = ww.length ? Math.round(kw / ww.length * 100) : 0;
     weekInfo.replaceChildren(
-      h('div', { class: 'row row--between' }, h('strong', null, weekData().title || `Неделя ${S.week}`), h('span', { class: 'num small' }, `${kw} из ${ww.length}`)),
+      h('div', { class: 'row row--between ln-words-week__head' }, h('strong', null, weekData().title || `Неделя ${S.week}`), h('span', { class: 'num small ln-nowrap' }, `${kw} из ${ww.length}`)),
       h('div', { class: 'progress' }, h('div', { class: 'progress__bar', style: { width: `${pct}%` } })));
   }
 

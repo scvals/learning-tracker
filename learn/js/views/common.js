@@ -106,7 +106,7 @@ export function accordion(summary, body, { open = false, cls = '' } = {}) {
 }
 
 export function sectionTitle(text, icon) {
-  return h('h2', { class: 'section__title' }, icon && lico(icon), h('span', null, text));
+  return h('h2', { class: 'section__title' }, h('span', null, text));
 }
 
 export function external(href, label, icon = 'external', cls = 'btn') {

@@ -12,10 +12,10 @@ const RE = /\*\*(.+?)\*\*|\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]|\{\{en:([^}]+?)\}\}
 function inline(text, out) {
   const s = String(text ?? '');
   let last = 0;
-  RE.lastIndex = 0;
+  const re = new RegExp(RE.source, 'g'); // свой экземпляр: inline() вызывается рекурсивно
   let m;
   const parts = [];
-  while ((m = RE.exec(s))) {
+  while ((m = re.exec(s))) {
     if (m.index > last) parts.push(s.slice(last, m.index));
     if (m[1] !== undefined) {
       const b = h('strong');
@@ -26,7 +26,7 @@ function inline(text, out) {
     } else if (m[4] !== undefined) {
       parts.push(enWord(m[4].trim()));
     }
-    last = RE.lastIndex;
+    last = re.lastIndex;
   }
   if (last < s.length) parts.push(s.slice(last));
   for (const p of parts) {
@@ -86,7 +86,7 @@ export async function openTerm(id) {
   if (!t) {
     body.append(h('p', { class: 'muted' }, 'Этот термин скоро появится в глоссарии.'));
   } else {
-    const pic = t.img ? await artEl(t.img, 'ln-term-sheet__art') : null;
+    const pic = t.img ? await artEl(t.img, `ln-term-sheet__art sk-${content.skillInfo(t.skillId).color}`) : null;
     if (pic) body.append(pic);
     if (t.short) body.append(mdBlock(t.short, 'ln-text ln-term-sheet__short'));
     if (t.more) body.append(mdBlock(t.more, 'ln-text small'));
@@ -95,7 +95,7 @@ export async function openTerm(id) {
     title: t ? t.term : 'Термин',
     content: body,
     onClose: () => { if (openSheet === s) openSheet = null; },
-    actions: t ? [h('a', { class: 'btn btn--ghost', href: `#/glossary/${encodeURIComponent(id)}`, onclick: () => s.close() }, 'Весь глоссарий')] : null,
+    actions: t ? [h('a', { class: 'btn btn--ghost', href: `#/glossary/${encodeURIComponent(id)}`, onclick: () => s.close() }, 'Подробнее в глоссарии')] : null,
   });
   openSheet = s;
   return s;

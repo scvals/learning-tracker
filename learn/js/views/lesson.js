@@ -67,6 +67,17 @@ export async function render(root, ctx) {
         (v) => progress.setLessonState(id, { need: { ...(state().need || {}), [i]: v || undefined } }))))));
   }
 
+  // ---------- ссылки на разделы ----------
+  const links = Array.isArray(lesson.links) ? lesson.links.filter((l) => l && (l.route || l.href) && l.title) : [];
+  if (links.length) {
+    wrap.append(h('div', { class: 'ln-links' }, links.map((l) => {
+      const href = l.route || l.href;
+      const ext = /^https?:/.test(href);
+      return h('a', { class: 'btn btn--block ln-link', href, target: ext ? '_blank' : null, rel: ext ? 'noopener noreferrer' : null },
+        lico(ext ? 'external' : 'book'), h('span', null, plain(l.title)), !ext && ico('chevron-right'));
+    })));
+  }
+
   // ---------- шаги ----------
   const stepsEl = h('section', { class: 'ln-steps', 'aria-label': 'Шаги' });
   if (lesson.steps.length) wrap.append(h('div', { class: 'ln-steps-wrap' }, sectionTitle('Шаг за шагом', 'path'), stepsEl));

@@ -118,7 +118,8 @@ export async function worksheets() {
 
 export async function shopping() {
   const m = await load('knit-extra.js');
-  return m?.shopping || null;
+  if (!m?.shopping) return null;
+  return { ...m.shopping, calcSkeins: typeof m.calcSkeins === 'function' ? m.calcSkeins : null };
 }
 
 export async function guide() {

@@ -94,7 +94,7 @@ export async function render(root, ctx) {
           })) : h('p', { class: 'small muted' }, 'На эту неделю блоков для занятия пока нет.')),
         h('div', { class: 'field' },
           h('span', { class: 'field__label' }, 'Сколько есть времени'),
-          h('div', { class: 'segmented', role: 'radiogroup', 'aria-label': 'Длительность' }, DURATIONS.map((m) => h('button', {
+          h('div', { class: 'segmented ln-dur', role: 'radiogroup', 'aria-label': 'Длительность' }, DURATIONS.map((m) => h('button', {
             class: `segmented__btn${setup.minutes === m ? ' is-active' : ''}`, type: 'button', role: 'radio', 'aria-checked': String(setup.minutes === m),
             onclick: () => { setup.minutes = m; drawSetup(); },
           }, `${m} мин`))))),
