@@ -54,30 +54,32 @@ function num(x, y, n) {
     `<text x="${x}" y="${y + 3.5}" font-size="10" font-weight="800" text-anchor="middle" style="fill:${SF}">${n}</text>`;
 }
 
-// Лицевая петля полотна — «галочка» V.
-function v(x, y, s = 12, w = 4) {
+// Лицевая петля полотна — «галочка» V (контур пути).
+function vD(x, y, s = 12) {
   const h = s * 1.05;
-  return yarn(`M${r1(x - s * 0.45)} ${y}Q${r1(x - s * 0.3)} ${r1(y + h * 0.75)} ${x} ${r1(y + h)}`, w, false) +
-    yarn(`M${r1(x + s * 0.45)} ${y}Q${r1(x + s * 0.3)} ${r1(y + h * 0.75)} ${x} ${r1(y + h)}`, w, false);
+  return `M${r1(x - s * 0.45)} ${r1(y)}Q${r1(x - s * 0.3)} ${r1(y + h * 0.75)} ${r1(x)} ${r1(y + h)}` +
+    `M${r1(x + s * 0.45)} ${r1(y)}Q${r1(x + s * 0.3)} ${r1(y + h * 0.75)} ${r1(x)} ${r1(y + h)}`;
 }
 // Изнаночная петля полотна — «бугорок».
-function bump(x, y, s = 12, w = 4) {
-  return yarn(`M${r1(x - s * 0.5)} ${r1(y + 2)}Q${x} ${r1(y - s * 0.45)} ${r1(x + s * 0.5)} ${r1(y + 2)}`, w, false);
+function bumpD(x, y, s = 12) {
+  return `M${r1(x - s * 0.5)} ${r1(y + 2)}Q${r1(x)} ${r1(y - s * 0.45)} ${r1(x + s * 0.5)} ${r1(y + 2)}`;
 }
-// Полотно лицевой глади: cols×rows галочек.
+const v = (x, y, s = 12, w = 4) => yarn(vD(x, y, s), w, false);
+const bump = (x, y, s = 12, w = 4) => yarn(bumpD(x, y, s), w, false);
+// Полотно лицевой глади: cols×rows галочек — одним путём.
 function vgrid(x0, y0, cols, rows, s = 12, w = 4) {
-  let o = '';
-  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) o += v(x0 + c * s, y0 + r * s * 0.95, s, w);
-  return o;
+  let d = '';
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) d += vD(x0 + c * s, y0 + r * s * 0.95, s);
+  return yarn(d, w, false);
 }
-// Платочная вязка: рядами чередуются бугорки (рубчики) и узкие просветы галочек.
+// Платочная вязка: ряды бугорков (рубчики) со сдвигом — одним путём.
 function garter(x0, y0, cols, ridges, s = 12, w = 4) {
-  let o = '';
+  let d = '';
   for (let r = 0; r < ridges; r++) {
     const y = y0 + r * s * 0.85;
-    for (let c = 0; c < cols; c++) o += bump(x0 + c * s + (r % 2 ? s / 2 : 0), y, s, w);
+    for (let c = 0; c < cols; c++) d += bumpD(x0 + c * s + (r % 2 ? s / 2 : 0), y, s);
   }
-  return o;
+  return yarn(d, w, false);
 }
 
 // Петля, надетая на горизонтальную спицу (вид спереди). Возвращает заднюю часть и переднюю стенку отдельно,
@@ -394,9 +396,9 @@ art['knit-stitch-anatomy'] = svg(240, 160, 'Как правильно сидит
 
 art['knit-edge'] = svg(240, 160, 'Кромка «цепочкой»', (() => {
   let o = '';
-  o += garter(52, 22, 11, 13, 12, 4);
+  o += garter(52, 22, 11, 12, 12, 4);
   // цепочки по краям: одно звено = 2 ряда
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
     const y = 18 + i * 20;
     o += yarn(`M40 ${y}C30 ${y + 6} 30 ${y + 14} 40 ${y + 20}C50 ${y + 14} 50 ${y + 6} 40 ${y}`, 4);
     o += yarn(`M190 ${y}C180 ${y + 6} 180 ${y + 14} 190 ${y + 20}C200 ${y + 14} 200 ${y + 6} 190 ${y}`, 4);
@@ -423,15 +425,15 @@ art['knit-bindoff'] = svg(240, 160, 'Закрытие петель', (() => {
 })());
 
 art['knit-garter'] = svg(240, 160, 'Платочная вязка', (() => {
-  let o = garter(24, 20, 17, 15, 12, 4);
+  let o = garter(24, 20, 17, 14, 12, 4);
   o += `<rect x="196" y="30" width="38" height="40" rx="6" style="fill:${SF};stroke:${AC}" stroke-width="1.4"/>`;
   o += t(215, 46, '1 рубчик', { size: 7.5, color: INK }) + t(215, 58, '= 2 ряда', { size: 7.5, color: INK });
   return o;
 })());
 
 art['knit-stockinette'] = svg(240, 160, 'Чулочная гладь: лицо и изнанка', (() => {
-  let o = vgrid(18, 18, 8, 11, 12, 3.4);
-  o += garter(132, 22, 8, 13, 12, 4);
+  let o = vgrid(18, 14, 8, 11, 12, 3.4);
+  o += garter(132, 20, 8, 12, 12, 4);
   o += t(58, 154, 'лицо: «косички»', { size: 9 });
   o += t(176, 154, 'изнанка: бугорки', { size: 9 });
   return o;
@@ -439,9 +441,11 @@ art['knit-stockinette'] = svg(240, 160, 'Чулочная гладь: лицо �
 
 art['knit-rib'] = svg(240, 160, 'Резинка 1×1 и 2×2', (() => {
   let o = '';
-  const col = (x, kind, rows) => { let s = ''; for (let r = 0; r < rows; r++) s += kind === 'v' ? v(x, 20 + r * 11.4, 12, 4) : bump(x, 24 + r * 11.4, 9, 3.4); return s; };
-  ['v', 'p', 'v', 'p', 'v', 'p', 'v'].forEach((k, i) => { o += col(18 + i * 13, k, 11); });
-  ['v', 'v', 'p', 'p', 'v', 'v', 'p', 'p'].forEach((k, i) => { o += col(132 + i * 13, k, 11); });
+  let dv = '', dp = '';
+  const col = (x, kind) => { for (let r = 0; r < 11; r++) { if (kind === 'v') dv += vD(x, 20 + r * 11.4, 12); else dp += bumpD(x, 24 + r * 11.4, 9); } };
+  ['v', 'p', 'v', 'p', 'v', 'p', 'v'].forEach((k, i) => col(18 + i * 13, k));
+  ['v', 'v', 'p', 'p', 'v', 'v', 'p', 'p'].forEach((k, i) => col(132 + i * 13, k));
+  o += yarn(dp, 3.4, false) + yarn(dv, 4, false);
   o += t(57, 154, '1×1', { size: 11, color: INK, weight: 800 });
   o += t(178, 154, '2×2', { size: 11, color: INK, weight: 800 });
   return o;
